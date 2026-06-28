@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abra Enterprise · L'IA de vos équipes. Sous votre contrôle.</title>
+<style>
+/* ── TOKENS ── */
+:root{
+  --navy:#1E2A4A;
+  --navy-deep:#141D35;
+  --teal:#0D9488;
+  --teal-light:#14B8A8;
+  --teal-faint:#E6F4F1;
+  --warm:#FAF9F6;
+  --warm-dark:#F0EDE8;
+  --grey:#5A6172;
+  --grey-light:#9CA3AF;
+  --border:#D8DCE4;
+  --white:#FFFFFF;
+  --font-body:'Inter','Helvetica Neue',Arial,sans-serif;
+  --font-mono:'JetBrains Mono','Fira Code',monospace;
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 4px 24px rgba(30,42,74,.10);
+  --shadow-lg:0 16px 56px rgba(30,42,74,.16);
+}
+
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--warm);color:var(--navy);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── LAYOUT ── */
+.container{max-width:1120px;margin:0 auto;padding:0 32px}
+.container--narrow{max-width:800px;margin:0 auto;padding:0 32px}
+section{padding:96px 0}
+section:nth-child(even){background:var(--warm)}
+section:nth-child(odd){background:var(--white)}
+
+/* Overrides for specific sections */
+.s-hero{background:var(--navy-deep) !important;padding:0}
+.s-constat{background:var(--white) !important}
+.s-plateforme{background:var(--warm) !important}
+.s-drive{background:var(--navy) !important}
+.s-triage{background:var(--warm) !important}
+.s-metiers{background:var(--white) !important}
+.s-tarifs{background:var(--navy) !important}
+.s-avantages{background:var(--warm) !important}
+.s-cta{background:var(--teal) !important}
+
+/* ── TYPOGRAPHY ── */
+.kicker{font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:block}
+.kicker--light{color:var(--teal-light)}
+h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.2;letter-spacing:-.015em}
+h3{font-size:1.15rem;font-weight:700;line-height:1.3}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--grey);max-width:620px}
+.lead--center{text-align:center;margin:0 auto}
+.lead--light{color:rgba(255,255,255,.75)}
+strong{color:inherit}
+p{margin-bottom:1rem}
+p:last-child{margin-bottom:0}
+
+/* ── BADGE ── */
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(13,148,136,.15);border:1px solid rgba(13,148,136,.35);border-radius:99px;padding:5px 14px;font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--teal-light);letter-spacing:.08em;text-transform:uppercase}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:var(--radius-sm);font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;border:none;text-decoration:none}
+.btn-primary{background:var(--teal);color:var(--white)}
+.btn-primary:hover{background:var(--teal-light);text-decoration:none;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.35)}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,.08);text-decoration:none}
+.btn-dark{background:var(--navy);color:var(--white)}
+.btn-dark:hover{background:var(--navy-deep);text-decoration:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(20,29,53,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{max-width:1120px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-mark{width:28px;height:28px;fill:none;stroke:var(--teal);stroke-width:2.5}
+.nav-logo-text{font-weight:800;font-size:1.1rem;color:var(--white);letter-spacing:-.01em}
+.nav-logo-text span{color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{color:rgba(255,255,255,.7);font-size:.88rem;font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--white);text-decoration:none}
+.nav-links .btn{padding:9px 20px;font-size:.85rem}
+.client-logo-area{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:6px 16px;display:flex;align-items:center;gap:8px}
+.client-logo-area span{font-size:.72rem;font-family:var(--font-mono);color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em}
+.client-logo-area strong{color:var(--white);font-size:.9rem}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding-top:64px}
+.hero-body{display:flex;flex-direction:column;justify-content:center;padding:80px 32px 60px;max-width:1120px;margin:0 auto;width:100%}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.hero-title{font-size:clamp(3rem,6vw,5.2rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:var(--white);margin-bottom:24px;max-width:840px}
+.hero-title .accent{color:var(--teal-light)}
+.hero-sub{font-size:1.2rem;color:rgba(255,255,255,.65);max-width:560px;line-height:1.7;margin-bottom:48px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:72px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);overflow:hidden}
+.hero-stat{padding:28px 32px;background:rgba(255,255,255,.04)}
+.hero-stat-value{font-size:2.4rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:4px}
+.hero-stat-value .unit{font-size:1.4rem;color:var(--teal-light)}
+.hero-stat-label{font-size:.82rem;color:rgba(255,255,255,.5);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em}
+
+/* ── GRID SYSTEMS ── */
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+/* ── CARDS ── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.card--dark{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+.card--dark:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
+.card--teal{border-left:4px solid var(--teal)}
+.card-icon{width:44px;height:44px;border-radius:10px;background:var(--teal-faint);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:1.4rem}
+.card-icon--dark{background:rgba(13,148,136,.2)}
+.card-tag{font-family:var(--font-mono);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:10px;display:block}
+.card-tag--light{color:var(--teal-light)}
+.card h3{margin-bottom:10px;color:var(--navy)}
+.card--dark h3{color:var(--white)}
+.card p{font-size:.93rem;color:var(--grey);line-height:1.65}
+.card--dark p{color:rgba(255,255,255,.6)}
+
+/* ── SECTION HEADERS ── */
+.section-header{text-align:center;margin-bottom:64px}
+.section-header h2{margin-bottom:16px}
+.section-header .lead{margin:0 auto}
+
+/* ── CONSTAT ── */
+.constat-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:center}
+.constat-quote{font-size:1.45rem;font-weight:700;line-height:1.45;color:var(--navy);border-left:4px solid var(--teal);padding-left:24px;margin-bottom:32px}
+.pain-list{list-style:none;display:flex;flex-direction:column;gap:16px}
+.pain-item{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:var(--radius-sm);background:var(--warm);border:1px solid var(--border)}
+.pain-num{font-family:var(--font-mono);font-size:.75rem;font-weight:700;color:var(--teal);background:var(--teal-faint);border-radius:6px;padding:3px 8px;flex-shrink:0;margin-top:2px}
+.pain-item-body strong{display:block;font-size:.92rem;margin-bottom:3px}
+.pain-item-body p{font-size:.85rem;color:var(--grey);margin:0}
+.stat-big{text-align:right}
+.stat-big .num{font-size:7rem;font-weight:900;line-height:1;color:var(--navy);letter-spacing:-.04em}
+.stat-big .num span{color:var(--teal)}
+.stat-big .label{font-size:1.1rem;color:var(--grey);max-width:280px;margin-left:auto}
+
+/* ── PLATEFORME PILLARS ── */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.pillar{padding:40px 32px;border-right:1px solid var(--border)}
+.pillar:last-child{border-right:none}
+.pillar-num{font-family:var(--font-mono);font-size:.7rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;display:block}
+.pillar h3{font-size:1.2rem;margin-bottom:12px}
+.pillar-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.pillar-features li{font-size:.88rem;color:var(--grey);display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.pillar-features li::before{content:"→";color:var(--teal);flex-shrink:0;font-weight:700}
+
+/* 3 TYPES BENTO */
+.type-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.type-card{border-radius:var(--radius);padding:32px;position:relative;overflow:hidden}
+.type-card--agent{background:var(--navy);color:var(--white)}
+.type-card--auto{background:var(--teal);color:var(--white)}
+.type-card--workflow{background:var(--warm-dark);color:var(--navy);border:1px solid var(--border)}
+.type-label{font-family:var(--font-mono);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.7;margin-bottom:8px;display:block}
+.type-card h3{font-size:1.3rem;margin-bottom:10px}
+.type-card p{font-size:.88rem;line-height:1.6;opacity:.8;margin-bottom:20px}
+.type-example{background:rgba(255,255,255,.1);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;line-height:1.5}
+.type-card--workflow .type-example{background:rgba(30,42,74,.07)}
+
+/* ── DRIVE ── */
+.drive-phases{display:flex;flex-direction:column;gap:0;border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden}
+.drive-phase{display:grid;grid-template-columns:80px 1fr 1fr;gap:0;border-bottom:1px solid rgba(255,255,255,.08)}
+.drive-phase:last-child{border-bottom:none}
+.drive-letter{background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:900;color:var(--teal-light);letter-spacing:-.02em;padding:32px;border-right:1px solid rgba(255,255,255,.08)}
+.drive-content{padding:28px 32px;border-right:1px solid rgba(255,255,255,.08)}
+.drive-content .phase-name{font-size:.7rem;font-family:var(--font-mono);color:var(--teal-light);text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px;display:block}
+.drive-content h3{color:var(--white);margin-bottom:8px;font-size:1.1rem}
+.drive-content p{color:rgba(255,255,255,.6);font-size:.9rem;margin:0}
+.drive-tool{padding:28px 32px;display:flex;flex-direction:column;justify-content:center}
+.drive-tool .tool-label{font-size:.68rem;font-family:var(--font-mono);color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block}
+.drive-tool p{color:rgba(255,255,255,.5);font-size:.85rem;margin:0;line-height:1.55}
+
+/* TIMELINE */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);overflow:hidden;margin-top:48px}
+.tl-item{padding:24px 24px;border-right:1px solid rgba(255,255,255,.08)}
+.tl-item:last-child{border-right:none}
+.tl-week{font-family:var(--font-mono);font-size:.68rem;font-weight:700;text-transform:uppercase;color:var(--teal-light);letter-spacing:.1em;margin-bottom:8px;display:block}
+.tl-item h4{color:var(--white);font-size:.95rem;margin-bottom:6px}
+.tl-item p{color:rgba(255,255,255,.5);font-size:.82rem;margin:0}
+
+/* ── METIERS ── */
+.metier-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;justify-content:center}
+.metier-tab{padding:8px 20px;border-radius:99px;font-size:.85rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--grey);transition:all .15s}
+.metier-tab.active,.metier-tab:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.metier-panels{}
+.metier-panel{display:none}
+.metier-panel.active{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start}
+.metier-info h3{font-size:1.5rem;margin-bottom:12px}
+.metier-info p{color:var(--grey);font-size:.95rem;line-height:1.7;margin-bottom:24px}
+.uc-grid{display:flex;flex-direction:column;gap:12px}
+.uc-card{background:var(--warm);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+.uc-type{font-family:var(--font-mono);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.type-agent{background:#EEF2FF;color:#4F46E5}
+.type-auto{background:#ECFDF5;color:#059669}
+.type-workflow{background:#FFF7ED;color:#C2410C}
+.uc-card h4{font-size:.92rem;margin-bottom:2px}
+.uc-card p{font-size:.82rem;color:var(--grey);margin:0}
+.uc-roi{font-family:var(--font-mono);font-size:.75rem;font-weight:700;color:var(--teal);white-space:nowrap}
+
+/* ── TARIFS ── */
+.pricing-grid{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start}
+.pricing-intro{color:rgba(255,255,255,.8)}
+.pricing-intro h2{color:var(--white);margin-bottom:16px}
+.pricing-intro p{font-size:.95rem;line-height:1.75;margin-bottom:24px}
+.pricing-cards{display:flex;flex-direction:column;gap:16px}
+.price-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:28px 32px}
+.price-card--featured{background:var(--teal);border-color:var(--teal)}
+.price-step{display:flex;gap:6px;align-items:center;margin-bottom:12px}
+.price-step-num{font-family:var(--font-mono);font-size:.65rem;font-weight:700;color:var(--teal-light);text-transform:uppercase;letter-spacing:.12em}
+.price-card--featured .price-step-num{color:rgba(255,255,255,.7)}
+.price-card h3{color:var(--white);font-size:1.05rem;margin-bottom:8px}
+.price-card--featured h3{color:var(--white)}
+.price-main{font-size:2.2rem;font-weight:800;color:var(--white);line-height:1;margin-bottom:4px}
+.price-period{font-size:.85rem;color:rgba(255,255,255,.55);margin-bottom:12px}
+.price-card p{font-size:.88rem;color:rgba(255,255,255,.6);margin:0}
+.price-card--featured p{color:rgba(255,255,255,.8)}
+.price-divider{border:none;border-top:1px solid rgba(255,255,255,.12);margin:16px 0}
+.price-example{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:28px 32px;margin-top:16px}
+.price-example h4{color:rgba(255,255,255,.5);font-size:.78rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+.price-example-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.9rem}
+.price-example-row:last-child{border-bottom:none}
+.price-example-label{color:rgba(255,255,255,.65)}
+.price-example-val{color:var(--white);font-weight:700;font-family:var(--font-mono);font-size:.88rem}
+
+/* ── AVANTAGES ── */
+.avantage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.avantage-card{padding:32px;border-radius:var(--radius);background:var(--white);border:1px solid var(--border)}
+.avantage-icon{font-size:2rem;margin-bottom:16px}
+.avantage-card h3{font-size:1rem;margin-bottom:10px}
+.avantage-card p{font-size:.88rem;color:var(--grey);line-height:1.65}
+.vs-box{margin-top:48px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.vs-header{display:grid;grid-template-columns:2fr 1fr 1fr;background:var(--navy);padding:14px 24px}
+.vs-header span{font-family:var(--font-mono);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5)}
+.vs-header span:last-child{color:var(--teal-light)}
+.vs-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:14px 24px;border-bottom:1px solid var(--border);font-size:.9rem;align-items:center}
+.vs-row:last-child{border-bottom:none}
+.vs-row:nth-child(odd){background:var(--warm)}
+.vs-feature{color:var(--navy);font-weight:500}
+.vs-no{color:var(--grey-light);font-size:.85rem}
+.vs-yes{color:var(--teal);font-weight:700}
+
+/* ── CTA ── */
+.cta-inner{display:flex;flex-direction:column;align-items:center;text-align:center;padding:80px 32px}
+.cta-inner h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--white);margin-bottom:16px;letter-spacing:-.02em;max-width:600px}
+.cta-inner p{font-size:1.1rem;color:rgba(255,255,255,.85);max-width:520px;margin-bottom:40px;line-height:1.7}
+.cta-question{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:var(--radius);padding:24px 40px;margin-bottom:40px;max-width:640px;font-size:1.2rem;font-weight:600;color:var(--white);line-height:1.5}
+.cta-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn-white{background:var(--white);color:var(--teal);font-weight:700}
+.btn-white:hover{background:var(--warm);text-decoration:none;transform:translateY(-1px)}
+.btn-outline-white{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.4)}
+.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.1);text-decoration:none}
+.contact-info{margin-top:32px;color:rgba(255,255,255,.6);font-size:.9rem}
+.contact-info a{color:var(--white);font-weight:600}
+
+/* ── FOOTER ── */
+footer{background:var(--navy-deep);padding:48px 0;border-top:1px solid rgba(255,255,255,.08)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-brand .nav-logo-text{font-size:1rem}
+.footer-meta{font-size:.82rem;color:rgba(255,255,255,.3);text-align:right}
+.footer-meta a{color:rgba(255,255,255,.45)}
+.footer-legal{font-size:.78rem;color:rgba(255,255,255,.25);margin-top:4px}
+
+/* ── DIVIDERS & UTILITIES ── */
+.mt-8{margin-top:8px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mt-32{margin-top:32px}.mt-48{margin-top:48px}.mt-64{margin-top:64px}
+.mb-8{margin-bottom:8px}.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}.mb-32{margin-bottom:32px}
+.text-center{text-align:center}
+.text-teal{color:var(--teal)}
+.text-light{color:rgba(255,255,255,.75)}
+.text-grey{color:var(--grey)}
+.text-white{color:var(--white)}
+hr.section-rule{border:none;border-top:1px solid var(--border);margin:0}
+hr.section-rule--dark{border-top-color:rgba(255,255,255,.1)}
+
+/* ── CHECK LIST ── */
+.check-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.check-list li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--grey);line-height:1.55}
+.check-list li::before{content:"✓";color:var(--teal);font-weight:800;flex-shrink:0;margin-top:.05em}
+.check-list--light li{color:rgba(255,255,255,.7)}
+.check-list--light li::before{color:var(--teal-light)}
+
+/* ── SCORE TABLE ── */
+.score-table{width:100%;border-collapse:collapse;border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+.score-table th{background:rgba(255,255,255,.06);padding:12px 20px;text-align:left;font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);font-weight:600}
+.score-table td{padding:14px 20px;border-top:1px solid rgba(255,255,255,.07);font-size:.9rem;color:rgba(255,255,255,.75)}
+.score-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-family:var(--font-mono);font-size:.65rem;font-weight:700}
+.score-hi{background:rgba(13,148,136,.25);color:var(--teal-light)}
+.score-med{background:rgba(251,191,36,.2);color:#FBBF24}
+.score-lo{background:rgba(239,68,68,.2);color:#F87171}
+
+/* ── ATELIERS ── */
+.atelier-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.atelier-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+.atelier-num{font-size:3rem;font-weight:900;color:var(--teal-faint);line-height:1;margin-bottom:8px;font-family:var(--font-mono)}
+.atelier-card h4{color:var(--navy);font-size:1rem;margin-bottom:6px}
+.atelier-card p{font-size:.88rem;color:var(--grey);margin-bottom:12px}
+.atelier-livrable{font-family:var(--font-mono);font-size:.72rem;color:var(--teal);background:var(--teal-faint);border-radius:6px;padding:4px 10px;display:inline-block}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .grid-2,.grid-3,.grid-4,.pillar-grid,.constat-grid,.pricing-grid,.drive-phase,.metier-panel.active,.type-grid,.atelier-steps,.avantage-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .drive-letter{padding:20px;font-size:1.8rem}
+  .stat-big{text-align:left}
+  .stat-big .num{font-size:5rem}
+}
+@media(max-width:600px){
+  .container{padding:0 20px}
+  section{padding:64px 0}
+  .hero-body{padding:60px 20px 48px}
+  .timeline{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <svg class="nav-logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 4 L28 26 H4 Z" stroke="#0D9488" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M16 14 L22 26 H10 Z" stroke="#0D9488" stroke-width="1.5" stroke-linejoin="round" fill="rgba(13,148,136,.15)"/>
+      </svg>
+      <span class="nav-logo-text">Abra <span>Enterprise</span></span>
+    </div>
+
+    <!-- LOGO CLIENT PERSONNALISABLE · modifier ce bloc pour chaque prospect -->
+    <div class="client-logo-area" id="client-logo">
+      <span>Présenté à</span>
+      <strong>[NOM DU CLIENT]</strong>
+    </div>
+
+    <div class="nav-links">
+      <a href="#plateforme">Plateforme</a>
+      <a href="#drive">Méthode</a>
+      <a href="#metiers">Cas d'usage</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#cta" class="btn btn-primary">Demander un cadrage →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="s-hero">
+  <div class="hero">
+    <div class="hero-body">
+      <div class="hero-eyebrow">
+        <span class="badge">MekorAI · Éditeur · Paris</span>
+      </div>
+      <h1 class="hero-title">
+        L'IA de vos équipes.<br><span class="accent">Sous votre contrôle.</span>
+      </h1>
+      <p class="hero-sub">Abra Enterprise est la plateforme qui transforme l'IA d'un sujet R&amp;D en un actif industriel mesurable · avec la méthode DRIVE™ pour aller du diagnostic terrain au ROI prouvé en six semaines.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary">Demander un atelier de cadrage →</a>
+        <a href="#drive" class="btn btn-outline">Découvrir la méthode</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">≈ <span class="unit">80</span>%</div>
+          <div class="hero-stat-label">des projets IA n'atteignent jamais la prod</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">6 <span class="unit">sem.</span></div>
+          <div class="hero-stat-label">du diagnostic au ROI mesuré</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">70<span class="unit">%</span></div>
+          <div class="hero-stat-label">des cas d'usage déjà disponibles en Marketplace</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONSTAT ══ -->
+<section class="s-constat" id="constat">
+  <div class="container">
+    <div class="constat-grid">
+      <div>
+        <span class="kicker">Le point de départ</span>
+        <p class="constat-quote">Le problème n'est pas technologique. Il est méthodologique.</p>
+        <p style="color:var(--grey);font-size:.95rem;line-height:1.75;margin-bottom:32px">Dans la plupart des PME et ETI, l'IA générative est déjà entrée dans le quotidien des équipes · souvent sans cadre. Des collaborateurs collent des données sensibles dans des outils grand public, chaque service teste son propre assistant, et la direction n'a aucune visibilité sur les coûts, les risques ni la valeur créée.</p>
+        <ul class="pain-list">
+          <li class="pain-item">
+            <span class="pain-num">01</span>
+            <div class="pain-item-body">
+              <strong>Dispersion · le chaos des POC</strong>
+              <p>Initiatives non alignées, doublons entre services, pas de source de vérité. Beaucoup d'énergie dépensée pour peu d'impact réel en production.</p>
+            </div>
+          </li>
+          <li class="pain-item">
+            <span class="pain-num">02</span>
+            <div class="pain-item-body">
+              <strong>Alignement faible · le goulot d'idéation</strong>
+              <p>Le cadrage est insuffisant. La solution précède le besoin métier. Les blocages Data et Sécurité sont découverts trop tard.</p>
+            </div>
+          </li>
+          <li class="pain-item">
+            <span class="pain-num">03</span>
+            <div class="pain-item-body">
+              <strong>Valeur invisible · ROI jamais mesuré</strong>
+              <p>Impossible de comparer la valeur d'un projet A versus B. Le COMEX navigue à vue sans KPI financiers fiables.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="stat-big">
+          <div class="num">≈&nbsp;<span>80</span>%</div>
+          <p class="label">des projets d'IA en entreprise n'atteignent jamais la production à l'échelle.</p>
+        </div>
+        <div style="margin-top:40px;background:var(--teal-faint);border:1px solid rgba(13,148,136,.25);border-radius:var(--radius);padding:28px 32px">
+          <span class="kicker">Notre conviction</span>
+          <p style="font-size:.95rem;color:var(--navy);line-height:1.7;margin-bottom:0">Une organisation n'a pas besoin de <em>plus</em> d'IA. Elle a besoin d'un cadre pour transformer ses intuitions métier en gains mesurés et industrialisés. <strong>Le cadrage est le maillon manquant.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PLATEFORME ══ -->
+<section class="s-plateforme" id="plateforme">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">La solution</span>
+      <h2>Abra Enterprise · plateforme d'industrialisation IA</h2>
+      <p class="lead lead--center">Du besoin au ROI mesuré. Une plateforme couvrant tout le cycle de vie : idéation, cadrage, déploiement, gouvernance et mesure.</p>
+    </div>
+
+    <!-- 3 PILIERS -->
+    <div class="pillar-grid">
+      <div class="pillar">
+        <span class="pillar-num">Pilier 01</span>
+        <div class="card-icon">🧭</div>
+        <h3>Pilotage</h3>
+        <p style="font-size:.9rem;color:var(--grey)">Unifier le portefeuille IA et rendre les arbitrages comparables. Fin des POC isolés.</p>
+        <ul class="pillar-features">
+          <li>Portfolio unifié · vue globale de toutes les initiatives</li>
+          <li>Priorisation automatique par ROI potentiel</li>
+          <li>Aide à la décision Go/No-Go documentée</li>
+          <li>Business case standardisé par projet</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">Pilier 02</span>
+        <div class="card-icon">⚙️</div>
+        <h3>Industrialisation</h3>
+        <p style="font-size:.9rem;color:var(--grey)">Accélérer le déploiement technique et sécurisé des agents, workflows et automatisations.</p>
+        <ul class="pillar-features">
+          <li>Orchestration · agents IA, workflows et automatisations</li>
+          <li>Intégrations API, RPA et connecteurs natifs (SAP, Salesforce…)</li>
+          <li>Traçabilité complète · logs et auditabilité</li>
+          <li>Gouvernance RBAC, SSO, VPC dédié</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">Pilier 03</span>
+        <div class="card-icon">📊</div>
+        <h3>Valeur</h3>
+        <p style="font-size:.9rem;color:var(--grey)">Transformer les hypothèses en résultats financiers. Mesurer l'usage réel et ajuster.</p>
+        <ul class="pillar-features">
+          <li>ROI ex-ante · estimation avant lancement</li>
+          <li>Mesure ex-post · tracking temps réel de l'usage</li>
+          <li>KPI alignés DSI / Métiers</li>
+          <li>Tableaux de bord automatiques pour le management</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3 TYPES -->
+    <div class="mt-64">
+      <div class="section-header" style="margin-bottom:40px">
+        <span class="kicker">Trois types de cas d'usage</span>
+        <h2>Abra couvre 100% du spectre IA</h2>
+        <p class="lead lead--center">Workflows, automatisations ou agents IA · chaque cas d'usage est classé, dimensionné et déployé selon sa nature réelle.</p>
+      </div>
+      <div class="type-grid">
+        <div class="type-card type-card--agent">
+          <span class="type-label">Déclencheur humain · Cas simple</span>
+          <h3>Agents IA</h3>
+          <p>Un assistant conversationnel capable de comprendre une intention, chercher l'info et répondre. L'IA navigue dans la donnée de manière non-linéaire, avec l'humain dans la boucle.</p>
+          <div class="type-example">
+            <strong>Exemple :</strong> Assistant RH · le salarié pose une question sur ses congés, l'agent lit la convention collective et répond avec précision.
+          </div>
+        </div>
+        <div class="type-card type-card--auto">
+          <span class="type-label">Déclencheur système · Cas répétitif</span>
+          <h3>Automatisations</h3>
+          <p>Tâches récurrentes qui tournent 24/7 sans intervention humaine, déclenchées par un événement · heure, e-mail reçu, alerte. L'IA agit comme un "ouvrier invisible".</p>
+          <div class="type-example">
+            <strong>Exemple :</strong> Veille réglementaire · chaque matin à 8h, scan de la presse financière et envoi d'un digest aux équipes Compliance.
+          </div>
+        </div>
+        <div class="type-card type-card--workflow">
+          <span class="type-label">Orchestration multi-étapes · Cas complexe</span>
+          <h3>Workflows</h3>
+          <p>Processus multi-étapes orchestré : agents + automatisations + décisions + validations humaines. Tâche complexe exécutée à la demande, déclenchée par un clic ou un upload.</p>
+          <div class="type-example">
+            <strong>Exemple :</strong> Analyse crédit · l'analyste uploade un bilan PDF, l'IA extrait les ratios financiers et génère une note de synthèse structurée.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOUVERNANCE -->
+    <div class="mt-64">
+      <div class="grid-2" style="gap:40px;align-items:center">
+        <div>
+          <span class="kicker">Gouvernance & Sécurité Enterprise-Grade</span>
+          <h2 style="margin-bottom:16px">Votre IA, vos données, votre infrastructure.</h2>
+          <p style="color:var(--grey);font-size:.95rem;line-height:1.75;margin-bottom:28px">Une architecture pensée pour le contrôle, la traçabilité et le déploiement maîtrisé · y compris en environnement bancaire ou souverain.</p>
+          <ul class="check-list">
+            <li><strong>On-Premise complet</strong> · déploiement sur votre infrastructure, aucune fuite de données possible hors du SI</li>
+            <li><strong>RBAC / SSO</strong> · intégration native aux annuaires (Azure AD, Okta), gestion fine des rôles par équipe</li>
+            <li><strong>VPC dédié</strong> · isolation totale des environnements pour garantir l'étanchéité des données</li>
+            <li><strong>Logs complets</strong> · traçabilité de bout en bout : qui a fait quoi, quand, avec quelle donnée</li>
+            <li><strong>Conformité AI Act</strong> · historique inaltérable des interactions IA, documentation Annexe IV, FRIA</li>
+          </ul>
+        </div>
+        <div>
+          <div class="card" style="padding:0;overflow:hidden">
+            <div style="background:var(--navy);padding:20px 24px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-family:var(--font-mono);font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em">3 niveaux de rôles</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border)">
+              <div style="padding:24px;border-right:1px solid var(--border)">
+                <div style="font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px">Admin IT</div>
+                <div style="font-size:.82rem;color:var(--grey);line-height:1.55">Tenants · SSO · Logs · Builder technique</div>
+              </div>
+              <div style="padding:24px;border-right:1px solid var(--border)">
+                <div style="font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px">Manager Métier</div>
+                <div style="font-size:.82rem;color:var(--grey);line-height:1.55">ROI · Équipes · Catalogue · Reporting</div>
+              </div>
+              <div style="padding:24px">
+                <div style="font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:8px">Utilisateur</div>
+                <div style="font-size:.82rem;color:var(--grey);line-height:1.55">Workflows · Agents · Chat · Feedback</div>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-16" style="background:var(--teal-faint);border-color:rgba(13,148,136,.25)">
+            <p style="font-size:.9rem;color:var(--navy);margin:0;line-height:1.7"><strong>Marque blanche complète.</strong> L'interface est brandée à votre charte graphique · logo, couleurs, domaine URL personnalisé. Vos équipes perçoivent l'outil comme un actif interne.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DRIVE ══ -->
+<section class="s-drive" id="drive">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker kicker--light">La méthode propriétaire</span>
+      <h2 class="text-white">DRIVE™ · du terrain au ROI mesuré</h2>
+      <p class="lead lead--light lead--center">Cinq phases, six semaines sur un périmètre pilote. Une décision Go / No-Go entre chaque phase. Un livrable formel à chaque étape. Le cadrage est le maillon manquant que nous apportons.</p>
+    </div>
+
+    <div class="drive-phases">
+      <div class="drive-phase">
+        <div class="drive-letter">D</div>
+        <div class="drive-content">
+          <span class="phase-name">Phase 1 · Discover</span>
+          <h3>Audit terrain</h3>
+          <p>Une demi-journée par interlocuteur clé. On écoute le réel : processus, irritants chronophages, volumétrie, outils et contraintes réglementaires. On n'expose pas l'IA · on comprend le terrain.</p>
+        </div>
+        <div class="drive-tool">
+          <span class="tool-label">Livrable propriétaire</span>
+          <p>Questionnaire d'audit standardisé par fonction · irritants, volumétrie, outils, données, contraintes AI Act. Interlocuteurs : Sponsor / COMEX, directions métier, DSI / RSSI.</p>
+        </div>
+      </div>
+      <div class="drive-phase">
+        <div class="drive-letter">R</div>
+        <div class="drive-content">
+          <span class="phase-name">Phase 2 · Rank</span>
+          <h3>Scoring et priorisation</h3>
+          <p>Chaque cas candidat est noté sur trois axes pondérés pour construire un portefeuille objectivement priorisé · ni par enthousiasme technologique ni par lobbying interne.</p>
+        </div>
+        <div class="drive-tool">
+          <span class="tool-label">Matrice de scoring DRIVE</span>
+          <p>Score = (Impact × 3) + (Faisabilité × 2) − (Risque × 1). Chaque axe noté de 1 à 5. Priorisation automatique du portefeuille.</p>
+        </div>
+      </div>
+      <div class="drive-phase">
+        <div class="drive-letter">I</div>
+        <div class="drive-content">
+          <span class="phase-name">Phase 3 · Identify · Triage 3T™</span>
+          <h3>Classification et qualification</h3>
+          <p>Chaque cas est classé selon sa nature réelle · Agent IA, Automatisation ou Workflow · ce qui détermine immédiatement sa complexité, son délai et son coût de déploiement.</p>
+        </div>
+        <div class="drive-tool">
+          <span class="tool-label">Fiche de qualification 3T™</span>
+          <p>Trois questions suffisent à classer n'importe quel cas. La nature détermine : délai, coût, mode de déploiement et correspondance Marketplace.</p>
+        </div>
+      </div>
+      <div class="drive-phase">
+        <div class="drive-letter">V</div>
+        <div class="drive-content">
+          <span class="phase-name">Phase 4 · Validate</span>
+          <h3>Business case ex-ante</h3>
+          <p>Hypothèse de gain quantifiée avant tout développement : heures libérées × coût horaire, volume × valeur unitaire, réduction d'erreurs. On pose le chiffre avant de construire.</p>
+        </div>
+        <div class="drive-tool">
+          <span class="tool-label">Business case + Go / No-Go</span>
+          <p>Données accessibles ? Connecteurs disponibles ? Budget validé ? Décision documentée pour chaque pilote. Matching Marketplace : réutilisation directe (1-2 j) à cas neuf (2 sem +).</p>
+        </div>
+      </div>
+      <div class="drive-phase">
+        <div class="drive-letter">E</div>
+        <div class="drive-content">
+          <span class="phase-name">Phase 5 · Execute</span>
+          <h3>Déploiement et ROI ex-post</h3>
+          <p>Les pilotes sont construits simultanément et mis en production. Les utilisateurs sont formés pendant le build · jamais après. ROI mesuré sur les premiers jours d'usage réel.</p>
+        </div>
+        <div class="drive-tool">
+          <span class="tool-label">Suivi & rapport ROI ex-post</span>
+          <p>Temps gagné, volume traité, taux d'adoption. Comparaison directe avec l'ex-ante. Gouvernance et roadmap 12-18 mois exploitable immédiatement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATELIERS -->
+    <div class="mt-64">
+      <div class="section-header">
+        <span class="kicker kicker--light">Conduite des ateliers</span>
+        <h2 class="text-white">Trois workshops qui rendent la méthode tangible</h2>
+      </div>
+      <div class="atelier-steps">
+        <div class="atelier-card">
+          <div class="atelier-num">01</div>
+          <h4>Atelier de cadrage stratégique</h4>
+          <p>Sponsor + COMEX · 2 h. Aligner les ambitions, définir les critères d'arbitrage et les règles Go/No-Go avant tout audit terrain.</p>
+          <span class="atelier-livrable">Note de cadrage validée</span>
+        </div>
+        <div class="atelier-card">
+          <div class="atelier-num">02</div>
+          <h4>Restitution et priorisation</h4>
+          <p>Plénière · 3 h. Présenter le portefeuille scoré et typé (3T), prioriser collectivement, choisir les 3 cas d'usage pilotes à lancer.</p>
+          <span class="atelier-livrable">Catalogue priorisé + pilotes</span>
+        </div>
+        <div class="atelier-card">
+          <div class="atelier-num">03</div>
+          <h4>Revue ROI et roadmap</h4>
+          <p>Sponsor + COMEX · 2 h. Présenter le ROI ex-post réel, comparer à l'ex-ante, décider du passage à l'échelle et des 12-18 mois suivants.</p>
+          <span class="atelier-livrable">Bilan ROI + roadmap</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-week">Semaine 1</span>
+        <h4>Audit terrain</h4>
+        <p>8 demi-journées d'entretiens par fonction</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-week">Semaine 2</span>
+        <h4>Cadrage et scoring</h4>
+        <p>Catalogue priorisé, matching Marketplace, business case ex-ante</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-week">Semaines 3 à 5</span>
+        <h4>Build et déploiement</h4>
+        <p>3 cas d'usage en parallèle, formation, mise en production</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-week">Semaine 6</span>
+        <h4>Mesure et roadmap</h4>
+        <p>ROI ex-post, gouvernance, roadmap 12-18 mois</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METIERS ══ -->
+<section class="s-metiers" id="metiers">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">Cas d'usage par ligne métier</span>
+      <h2>Des gains mesurés dans chaque direction</h2>
+      <p class="lead lead--center">Les cas d'usage ci-dessous sont issus de déploiements réels et de notre référentiel de 72 points de douleur qualifiés. Vos priorités sont définies ensemble pendant l'atelier de cadrage.</p>
+    </div>
+
+    <div class="metier-tabs">
+      <button class="metier-tab active" onclick="showMetier('direction')">Direction</button>
+      <button class="metier-tab" onclick="showMetier('commerce')">Commerce &amp; ADV</button>
+      <button class="metier-tab" onclick="showMetier('rh')">Ressources humaines</button>
+      <button class="metier-tab" onclick="showMetier('ops')">Opérations</button>
+      <button class="metier-tab" onclick="showMetier('finance')">Finance</button>
+      <button class="metier-tab" onclick="showMetier('support')">Support client</button>
+      <button class="metier-tab" onclick="showMetier('marketing')">Marketing</button>
+    </div>
+
+    <div class="metier-panels">
+
+      <!-- DIRECTION -->
+      <div class="metier-panel active" id="panel-direction">
+        <div class="metier-info">
+          <h3>Direction et pilotage</h3>
+          <p>La direction perd du temps en synthèses manuelles, en recherche d'information dispersée et en arbitrages sans données fiables. Abra transforme les données internes en aide à la décision opérationnelle.</p>
+          <ul class="check-list">
+            <li>Synthèses automatiques de réunions et décisions</li>
+            <li>Tableaux de bord ROI par initiative IA</li>
+            <li>Alertes sur dérive de projets ou de coûts</li>
+          </ul>
+        </div>
+        <div class="uc-grid">
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Assistant de préparation de CODIR</h4><p>Consolide les rapports des directions, génère un résumé exécutif et identifie les points de décision prioritaires.</p></div><span class="uc-roi">−4 h/sem.</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Rapport de performance hebdomadaire</h4><p>Agrège les KPI des outils métiers chaque lundi matin et envoie un digest formaté au COMEX.</p></div><span class="uc-roi">−3 h/sem.</span></div>
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Instruction de nouvelle initiative IA</h4><p>Cadrage Why + Specs + ROI ex-ante, validation Go/No-Go documentée, passage en Marketplace ou développement.</p></div><span class="uc-roi">×3 rapidité</span></div>
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Recherche documentaire interne</h4><p>Répond aux questions sur les contrats, politiques internes ou historiques projets en citant ses sources.</p></div><span class="uc-roi">−70 %</span></div>
+        </div>
+      </div>
+
+      <!-- COMMERCE -->
+      <div class="metier-panel" id="panel-commerce">
+        <div class="metier-info">
+          <h3>Commerce et ADV</h3>
+          <p>Les équipes commerciales passent une part significative de leur temps sur des tâches administratives à faible valeur. Abra libère ce temps pour les activités de vente et de relation client à forte valeur.</p>
+          <ul class="check-list">
+            <li>Rédaction et personnalisation de devis</li>
+            <li>Qualification des demandes entrantes</li>
+            <li>Suivi et relance automatisés</li>
+          </ul>
+        </div>
+        <div class="uc-grid">
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Génération automatique de devis</h4><p>À partir d'un formulaire ou d'un brief, génère un devis complet avec variantes tarifaires et conditions commerciales.</p></div><span class="uc-roi">30 sec.</span></div>
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Préparation de rendez-vous client</h4><p>Fiche prospect enrichie : contexte société, historique relation, actualités, propositions de valeur adaptées.</p></div><span class="uc-roi">−45 min/RDV</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Mise à jour CRM post-appel</h4><p>Transcription et analyse de la réunion, mise à jour automatique des champs CRM et création des prochaines tâches.</p></div><span class="uc-roi">Temps réel</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Relances clients et factures</h4><p>Séquences de relance personnalisées déclenchées par les événements CRM · devis expirant, facture en retard.</p></div><span class="uc-roi">−80 % manuel</span></div>
+        </div>
+      </div>
+
+      <!-- RH -->
+      <div class="metier-panel" id="panel-rh">
+        <div class="metier-info">
+          <h3>Ressources humaines</h3>
+          <p>Les équipes RH traitent un volume élevé de questions répétitives et de processus administratifs. Abra automatise les tâches à faible valeur et améliore l'expérience des collaborateurs.</p>
+          <ul class="check-list">
+            <li>Onboarding automatisé et suivi</li>
+            <li>Assistant RH conversationnel</li>
+            <li>Traitement de documents RH</li>
+          </ul>
+        </div>
+        <div class="uc-grid">
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Onboarding collaborateur complet</h4><p>Du contrat signé à l'inscription aux formations obligatoires · orchestration automatique des étapes et des parties prenantes.</p></div><span class="uc-roi">−70 % admin</span></div>
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Assistant RH 24/7</h4><p>Répond aux questions congés, paie, avantages, convention collective · en citant les sources internes. Escalade si besoin.</p></div><span class="uc-roi">−60 % tickets</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Traitement des notes de frais</h4><p>Extraction des données des justificatifs uploadés, validation des règles de politique voyage, soumission à la paie.</p></div><span class="uc-roi">−80 % saisie</span></div>
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Réponse aux appels à candidatures</h4><p>Qualification des CV entrants, scoring selon la fiche de poste, communication aux candidats non retenus.</p></div><span class="uc-roi">×4 rapidité</span></div>
+        </div>
+      </div>
+
+      <!-- OPS -->
+      <div class="metier-panel" id="panel-ops">
+        <div class="metier-info">
+          <h3>Opérations et back-office</h3>
+          <p>Les équipes opérationnelles subissent les re-saisies entre logiciels, les contrôles manuels et les flux documentaires chronophages. Abra connecte et orchestre ces processus bout-en-bout.</p>
+          <ul class="check-list">
+            <li>Réconciliation de données entre SI</li>
+            <li>Documentation technique automatisée</li>
+            <li>Contrôles qualité assistés</li>
+          </ul>
+        </div>
+        <div class="uc-grid">
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Réconciliation multi-sources</h4><p>Synchronisation automatique des données entre ERP, CRM et outils opérationnels · détection des écarts et alertes.</p></div><span class="uc-roi">−90 % erreurs</span></div>
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Traitement de documents entrants</h4><p>Extraction, classification et routage automatique des bons de commande, factures fournisseurs et courriers.</p></div><span class="uc-roi">−75 % saisie</span></div>
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Documentation technique</h4><p>Génère et met à jour les procédures opérationnelles à partir des échanges d'équipe et des modifications de processus.</p></div><span class="uc-roi">−50 % rédaction</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Contrôle qualité assisté</h4><p>Analyse automatique des livrables selon une grille de critères, signalement des non-conformités avant envoi client.</p></div><span class="uc-roi">0 erreur envoyée</span></div>
+        </div>
+      </div>
+
+      <!-- FINANCE -->
+      <div class="metier-panel" id="panel-finance">
+        <div class="metier-info">
+          <h3>Finance et contrôle de gestion</h3>
+          <p>Les équipes finance passent un temps considérable à préparer des reportings manuels et à rechercher des informations dans des systèmes hétérogènes. Abra automatise la production d'analyses financières.</p>
+          <ul class="check-list">
+            <li>Reporting automatisé multi-sources</li>
+            <li>Analyse de documents financiers</li>
+            <li>Détection d'anomalies</li>
+          </ul>
+        </div>
+        <div class="uc-grid">
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Analyse de bilan et note de synthèse</h4><p>Upload d'un PDF financier · extraction des ratios clés, génération d'une note d'analyse structurée avec signaux d'alerte.</p></div><span class="uc-roi">−3 h/dossier</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Reporting mensuel automatique</h4><p>Agrégation des données comptables et opérationnelles, génération du rapport de gestion et envoi aux parties prenantes.</p></div><span class="uc-roi">−2 j/mois</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Détection d'anomalies comptables</h4><p>Surveillance en continu des écritures · signalement des doublons, des montants hors-normes et des imputations suspectes.</p></div><span class="uc-roi">Temps réel</span></div>
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Assistant de conformité fiscale</h4><p>Répond aux questions sur la réglementation TVA, les obligations déclaratives et les règles de facturation en citant les sources officielles.</p></div><span class="uc-roi">−40 % sollicitations</span></div>
+        </div>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="metier-panel" id="panel-support">
+        <div class="metier-info">
+          <h3>Support et relation client</h3>
+          <p>Les équipes support traitent un volume élevé de demandes récurrentes qui consomment du temps à forte valeur. Abra automatise le traitement des requêtes de niveau 1 et 2.</p>
+          <ul class="check-list">
+            <li>Réponses assistées et personnalisées</li>
+            <li>Recherche dans la base de connaissances</li>
+            <li>Traitement automatique des tickets récurrents</li>
+          </ul>
+        </div>
+        <div class="uc-grid">
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Support client N1 automatisé</h4><p>Agent conversationnel qui répond aux questions fréquentes, consulte la base de connaissances et escalade si nécessaire.</p></div><span class="uc-roi">−60 % tickets N1</span></div>
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Traitement de réclamation complexe</h4><p>Qualification, recherche dans l'historique client, proposition de résolution et communication · avec validation humaine.</p></div><span class="uc-roi">×3 rapidité</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Mise à jour base de connaissances</h4><p>Détecte les nouvelles solutions validées par les agents et enrichit automatiquement la base documentaire.</p></div><span class="uc-roi">Toujours à jour</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Enquête satisfaction automatisée</h4><p>Envoi de l'enquête NPS/CSAT déclenché par la clôture du ticket, consolidation et alertes sur les scores bas.</p></div><span class="uc-roi">100 % couverture</span></div>
+        </div>
+      </div>
+
+      <!-- MARKETING -->
+      <div class="metier-panel" id="panel-marketing">
+        <div class="metier-info">
+          <h3>Marketing et contenu</h3>
+          <p>La production de contenu marketing est chronophage et difficile à maintenir à l'échelle. Abra accélère la création, la déclinaison et la distribution de contenus tout en préservant l'identité de marque.</p>
+          <ul class="check-list">
+            <li>Rédaction et déclinaison de contenus</li>
+            <li>Veille concurrentielle automatisée</li>
+            <li>Fiches produits et catalogues</li>
+          </ul>
+        </div>
+        <div class="uc-grid">
+          <div class="uc-card"><span class="uc-type type-workflow">Workflow</span><div><h4>Production de fiche produit</h4><p>À partir des spécifications techniques, génère la fiche produit en plusieurs langues et formats (web, print, marketplace).</p></div><span class="uc-roi">−80 % temps</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Veille concurrentielle quotidienne</h4><p>Scan des sources définies, extraction des signaux clés, digest personnalisé envoyé chaque matin aux équipes marketing.</p></div><span class="uc-roi">Couverture ×10</span></div>
+          <div class="uc-card"><span class="uc-type type-agent">Agent IA</span><div><h4>Copilote de rédaction</h4><p>Assistant qui aide à rédiger, reformuler et adapter le ton des contenus selon le canal et la cible · en restant dans la charte.</p></div><span class="uc-roi">×2 volume</span></div>
+          <div class="uc-card"><span class="uc-type type-auto">Automatisation</span><div><h4>Déclinaison multicanal</h4><p>Adapte automatiquement un contenu validé pour les différents formats (LinkedIn, emailing, site web, newsletter).</p></div><span class="uc-roi">1 source → 5 formats</span></div>
+        </div>
+      </div>
+
+    </div><!-- /metier-panels -->
+  </div>
+</section>
+
+<!-- ══ TARIFS ══ -->
+<section class="s-tarifs" id="tarifs">
+  <div class="container">
+    <div class="pricing-grid">
+      <div class="pricing-intro">
+        <span class="kicker kicker--light">Les tarifs</span>
+        <h2>Une offre simple et transparente</h2>
+        <p>Trois éléments lisibles. Pas de surprise de consommation, pas de coûts cachés. Tous les montants sont hors taxes.</p>
+        <ul class="check-list check-list--light mt-32">
+          <li>Jetons IA inclus dans le prix · pas de surcoût modèle</li>
+          <li>Déploiement on-premise ou souverain disponible</li>
+          <li>Support éditeur N3 assuré par MekorAI</li>
+          <li>Données restituées à la fin du contrat sur demande</li>
+          <li>Droit français · Tribunal de commerce de Paris</li>
+        </ul>
+      </div>
+      <div>
+        <div class="pricing-cards">
+          <div class="price-card">
+            <div class="price-step"><span class="price-step-num">Étape 01</span></div>
+            <h3>Plan IA de démarrage</h3>
+            <div class="price-main">8 000 €</div>
+            <div class="price-period">HT · forfait unique · non remboursable</div>
+            <hr class="price-divider">
+            <p>Audit DRIVE terrain, atelier de cadrage, identification et priorisation des cas d'usage, business case ex-ante, feuille de route chiffrée. En quelques semaines, vous savez exactement par où commencer et ce que cela rapporte.</p>
+          </div>
+          <div class="price-card">
+            <div class="price-step"><span class="price-step-num">Étape 02</span></div>
+            <h3>Mise en oeuvre pilote</h3>
+            <div class="price-main">Sur devis</div>
+            <div class="price-period">Après atelier de cadrage · facturation en jours-homme</div>
+            <hr class="price-divider">
+            <p>Déploiement des 2 à 3 cas d'usage prioritaires sur la plateforme, connectés à vos outils métiers, avec mesure des résultats. Option "IA au résultat" disponible · une part de la rémunération indexée sur la performance des cas livrés.</p>
+          </div>
+          <div class="price-card price-card--featured">
+            <div class="price-step"><span class="price-step-num">Étape 03</span></div>
+            <h3>Licence Abra Enterprise</h3>
+            <div class="price-main">39 €</div>
+            <div class="price-period">HT / utilisateur / mois · tokens inclus · facturation annuelle</div>
+            <hr class="price-divider">
+            <p>Accès complet à la plateforme (Pilotage, Industrialisation, Valeur), gouvernance complète RBAC / SSO, marketplace, reporting ROI. Option BYOK (votre clé API) disponible à 29 € HT / utilisateur / mois.</p>
+          </div>
+        </div>
+        <div class="price-example">
+          <h4>Exemple de budget · ETI 100 utilisateurs</h4>
+          <div class="price-example-row">
+            <span class="price-example-label">Plan IA de démarrage (audit DRIVE)</span>
+            <span class="price-example-val">8 000 € HT · une fois</span>
+          </div>
+          <div class="price-example-row">
+            <span class="price-example-label">Mise en oeuvre pilote (2-3 cas)</span>
+            <span class="price-example-val">Sur devis post-cadrage</span>
+          </div>
+          <div class="price-example-row">
+            <span class="price-example-label">Licence · 100 utilisateurs · 12 mois</span>
+            <span class="price-example-val">46 800 € HT / an</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AVANTAGES ══ -->
+<section class="s-avantages" id="avantages">
+  <div class="container">
+    <div class="section-header">
+      <span class="kicker">Pourquoi Abra Enterprise</span>
+      <h2>Ce qui nous distingue concrètement</h2>
+      <p class="lead lead--center">Au croisement de la rigueur d'un cabinet de stratégie et de la capacité d'exécution d'un éditeur · un espace que personne n'occupe pleinement.</p>
+    </div>
+    <div class="avantage-grid">
+      <div class="avantage-card">
+        <div class="avantage-icon">🏛️</div>
+        <h3>Souveraineté réelle</h3>
+        <p>Un déploiement vraiment auto-hébergé sur votre infrastructure · là où les plateformes conçues uniquement en SaaS ne peuvent pas le proposer. Vos données ne quittent jamais votre périmètre.</p>
+      </div>
+      <div class="avantage-card">
+        <div class="avantage-icon">📋</div>
+        <h3>Conformité AI Act native</h3>
+        <p>Moteur d'aide à la conformité intégré : registre des systèmes d'IA, modèles d'analyse d'impact (FRIA) et de documentation technique (Annexe IV) prêts à l'emploi.</p>
+      </div>
+      <div class="avantage-card">
+        <div class="avantage-icon">🔓</div>
+        <h3>Standards ouverts</h3>
+        <p>Architecture fondée sur des standards ouverts. Pas d'enfermement propriétaire, pas de langage maison qui rend votre IA captive d'un seul éditeur.</p>
+      </div>
+      <div class="avantage-card">
+        <div class="avantage-icon">🎯</div>
+        <h3>Méthode incluse</h3>
+        <p>La méthode DRIVE™ et l'accompagnement font partie de l'offre. Vous n'achetez pas un outil de plus · vous obtenez des résultats mesurés, pas des promesses.</p>
+      </div>
+      <div class="avantage-card">
+        <div class="avantage-icon">💡</div>
+        <h3>Tarif tout compris</h3>
+        <p>Un prix unique et lisible, tokens inclus. Pas de plafonds d'usage opaques ni de coûts additionnels liés aux modèles d'IA que vous consommez.</p>
+      </div>
+      <div class="avantage-card">
+        <div class="avantage-icon">📈</div>
+        <h3>ROI mesuré, pas estimé</h3>
+        <p>Comparaison systématique ex-ante / ex-post sur l'usage réel. Vous savez ce que l'IA rapporte · en heures libérées et en euros · pas en ressenti.</p>
+      </div>
+    </div>
+
+    <!-- VS TABLE -->
+    <div class="vs-box mt-64">
+      <div class="vs-header">
+        <span>Critère</span>
+        <span>Marché</span>
+        <span>Abra Enterprise</span>
+      </div>
+      <div class="vs-row">
+        <span class="vs-feature">Déploiement on-premise réel</span>
+        <span class="vs-no">Partiel ou absent</span>
+        <span class="vs-yes">✓ Complet</span>
+      </div>
+      <div class="vs-row">
+        <span class="vs-feature">Conformité AI Act intégrée</span>
+        <span class="vs-no">Add-on ou manuel</span>
+        <span class="vs-yes">✓ Natif</span>
+      </div>
+      <div class="vs-row">
+        <span class="vs-feature">ROI ex-ante et ex-post natif</span>
+        <span class="vs-no">Absent</span>
+        <span class="vs-yes">✓ Intégré</span>
+      </div>
+      <div class="vs-row">
+        <span class="vs-feature">Méthode d'audit incluse</span>
+        <span class="vs-no">Non</span>
+        <span class="vs-yes">✓ DRIVE™</span>
+      </div>
+      <div class="vs-row">
+        <span class="vs-feature">Tokens inclus dans la licence</span>
+        <span class="vs-no">Souvent en sus</span>
+        <span class="vs-yes">✓ Inclus</span>
+      </div>
+      <div class="vs-row">
+        <span class="vs-feature">Architecture standards ouverts</span>
+        <span class="vs-no">Souvent propriétaire</span>
+        <span class="vs-yes">✓ Open standards</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="s-cta" id="cta">
+  <div class="container">
+    <div class="cta-inner">
+      <span class="kicker" style="color:rgba(255,255,255,.7)">La prochaine étape</span>
+      <h2>Un atelier de cadrage d'une heure pour commencer.</h2>
+      <p>La meilleure façon de mesurer ce qu'Abra Enterprise peut apporter à vos équipes, c'est de cadrer ensemble vos premiers cas d'usage. Pas de présentation générique · un échange sur vos enjeux réels.</p>
+      <div class="cta-question">
+        Préférez-vous organiser cet échange en visio ou en présentiel dans vos locaux&nbsp;?
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:gabriel@abracadabrai.com?subject=Demande%20d'atelier%20de%20cadrage%20Abra%20Enterprise&body=Bonjour%20Gabriel%2C%0A%0AJe%20souhaite%20organiser%20un%20atelier%20de%20cadrage.%0A%0APr%C3%A9f%C3%A9rence%20%3A%20[Visio%20%2F%20Pr%C3%A9sentiel]%0ACr%C3%A9neaux%20%3A%20[...]" class="btn btn-white">Réserver un créneau →</a>
+        <a href="tel:+33782531100" class="btn btn-outline-white">07 82 53 11 00</a>
+      </div>
+      <div class="contact-info">
+        <strong>Gabriel Ohana</strong>, CEO MekorAI SAS ·
+        <a href="mailto:gabriel@abracadabrai.com">gabriel@abracadabrai.com</a> ·
+        <a href="tel:+33782531100">07 82 53 11 00</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <svg class="nav-logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4 L28 26 H4 Z" stroke="#0D9488" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+          <span class="nav-logo-text">Abra <span>Enterprise</span></span>
+        </div>
+        <div style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.3)">L'IA de vos équipes. Sous votre contrôle.</div>
+      </div>
+      <div class="footer-meta">
+        <div><a href="mailto:gabriel@abracadabrai.com">gabriel@abracadabrai.com</a> · <a href="tel:+33782531100">07 82 53 11 00</a></div>
+        <div class="footer-legal">MekorAI SAS · SIREN 939 056 826 · Paris · Document confidentiel · propriété de MekorAI SAS · Méthode DRIVE™ marque déposée</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Tabs métiers ──
+function showMetier(id){
+  document.querySelectorAll('.metier-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.metier-panel').forEach(p=>p.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+
+// ── Nav active link ──
+const sections=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.nav-links a[href^="#"]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.style.color='');
+      const a=document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
+      if(a)a.style.color='var(--white)';
+    }
+  });
+},{threshold:.35});
+sections.forEach(s=>obs.observe(s));
+
+// ── Smooth fade-in on scroll ──
+const fadeEls=document.querySelectorAll('.card,.drive-phase,.atelier-card,.avantage-card,.uc-card,.tl-item,.pillar,.type-card');
+const fadeObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:.12});
+fadeEls.forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(18px)';
+  el.style.transition='opacity .5s ease, transform .5s ease';
+  fadeObs.observe(el);
+});
+</script>
+</body>
+</html>
