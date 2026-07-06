@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposition MekorAI pour Milexia | MekorAI</title>
+  <meta name="description" content="MekorAI · Proposition commerciale pour Milexia. Plateforme IA gouvernée, méthode DRIVE, ROI mesuré.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --primary: #1E2A4A;
+      --primary-light: #2B3D6E;
+      --primary-dark: #141D35;
+      --teal: #0D9488;
+      --teal-light: #14B8A8;
+      --sky: #0EA5E9;
+      --accent: #6366F1;
+      --client: #0EA5E9;
+      --warm: #FAF9F6;
+      --warm-100: #F5F3EE;
+      --warm-200: #EDEAE3;
+      --foreground: #141820;
+      --muted: #757D8A;
+      --border: #E4E6EC;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--warm);
+      color: var(--foreground);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      font-feature-settings: "cv11","ss01","ss03";
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: rgba(30,42,74,0.12); border-radius: 3px; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-l { opacity: 0; transform: translateX(-32px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal-r { opacity: 0; transform: translateX(32px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal-l.visible, .reveal-r.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay:.1s; } .d2 { transition-delay:.2s; } .d3 { transition-delay:.3s; } .d4 { transition-delay:.4s; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 96px 0; }
+    .section-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); max-width: 1000px; margin: 0 auto; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(20,29,53,.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      transition: all .3s;
+    }
+    nav.scrolled {
+      background: rgba(250,249,246,.96); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .nav-logo img { height: 40px; }
+    .nav-logo .logo-light { display: block; }
+    .nav-logo .logo-dark { display: none; }
+    nav.scrolled .nav-logo .logo-light { display: none; }
+    nav.scrolled .nav-logo .logo-dark { display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: .83rem; font-weight: 500; color: rgba(255,255,255,.65); transition: color .15s; }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: white; }
+    nav.scrolled .nav-links a:hover { color: var(--foreground); }
+    /* Client badge in nav */
+    .nav-client {
+      display: flex; align-items: center; gap: 8px;
+      padding: 5px 12px 5px 8px; border-radius: 8px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      font-size: .75rem; color: rgba(255,255,255,.7);
+    }
+    nav.scrolled .nav-client { background: var(--warm-100); border-color: var(--border); color: var(--muted); }
+    .nav-client img { height: 22px; max-width: 80px; object-fit: contain; border-radius: 3px; }
+    .nav-client-text { font-size:.7rem; opacity:.6; }
+    .nav-cta {
+      padding: 9px 20px; border-radius: 8px; font-size: .82rem; font-weight: 600;
+      background: white; color: var(--primary); transition: all .2s;
+    }
+    nav.scrolled .nav-cta { background: var(--primary); color: white; }
+    .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      background: #141D35;
+      background-image:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(13,148,136,.14) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 60%, rgba(99,102,241,.08) 0%, transparent 60%);
+      overflow: hidden; position: relative; padding-top: 64px;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: .04;
+      background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
+    }
+    .hero-body { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 80px 32px 60px; width: 100%; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px; padding: 6px 14px; margin-bottom: 32px;
+    }
+    .hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.2); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.2); } 50% { box-shadow: 0 0 0 7px rgba(34,197,94,.05); } }
+    .hero-eyebrow span { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .1em; }
+    .hero-eyebrow strong { color: rgba(255,255,255,.9); font-size: .8rem; }
+    .hero-client-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .hero-x { font-size: 1.2rem; color: rgba(255,255,255,.3); font-weight: 300; }
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.08;
+      letter-spacing: -.03em; color: white; margin-bottom: 20px; max-width: 820px;
+    }
+    .hero-title em { font-style: italic; color: #2dd4bf; }
+    .hero-sub {
+      font-size: 1.1rem; color: rgba(255,255,255,.6); max-width: 600px;
+      line-height: 1.75; margin-bottom: 44px;
+    }
+    .hero-sub strong { color: rgba(255,255,255,.9); font-weight: 600; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+    .btn-white {
+      background: white; color: var(--primary); padding: 14px 28px; border-radius: 10px;
+      font-size: .92rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;
+      transition: all .2s;
+    }
+    .btn-white:hover { background: rgba(255,255,255,.95); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,255,255,.15); }
+    .btn-ghost {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); color: white;
+      padding: 14px 28px; border-radius: 10px; font-size: .92rem; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; overflow: hidden;
+    }
+    .hero-stat { padding: 28px 32px; }
+    .hero-stat-val { font-size: 2.6rem; font-weight: 900; color: #2dd4bf; line-height: 1; margin-bottom: 6px; letter-spacing: -.03em; }
+    .hero-stat-label { font-family: 'JetBrains Mono', monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.4); line-height: 1.5; }
+    .scroll-ind {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,.3); animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100% { transform:translateX(-50%) translateY(0); opacity:.4; } 50% { transform:translateX(-50%) translateY(8px); opacity:1; } }
+    .scroll-ind span { font-family: monospace; font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; }
+
+    /* ── KICKER ── */
+    .kicker { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .kicker-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+    .kicker-text { font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--teal); }
+    .kicker.light .kicker-dot { background: #2dd4bf; }
+    .kicker.light .kicker-text { color: rgba(255,255,255,.55); }
+
+    /* ── CARDS ── */
+    .card {
+      background: white; border: 1px solid var(--border); border-radius: 12px; padding: 28px;
+      transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .2s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 60px -12px rgba(30,42,74,.10); border-color: rgba(30,42,74,.18); }
+    .arg-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px; padding: 22px 24px;
+      display: flex; align-items: flex-start; gap: 18px;
+      transition: transform .3s ease, box-shadow .3s;
+    }
+    .arg-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px -8px rgba(30,42,74,.08); }
+    .arg-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+
+    /* ── SECTION CONSTAT ── */
+    #constat { background: var(--warm); }
+    .constat-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
+    .constat-big { font-size: 5rem; font-weight: 900; line-height: 1; letter-spacing: -.04em; color: var(--primary); }
+    .constat-big span { color: var(--teal); }
+    .constat-args { display: flex; flex-direction: column; gap: 14px; }
+
+    /* ── SECTION DRIVE ── */
+    .s-drive { background: linear-gradient(180deg, #1E2A4A 0%, #141D35 100%); padding: 96px 0; }
+    .drive-phases { border: 1px solid rgba(255,255,255,.1); border-radius: 16px; overflow: hidden; }
+    .drive-row {
+      display: grid; grid-template-columns: 72px 1fr; border-bottom: 1px solid rgba(255,255,255,.07);
+      transition: border-left-color .3s, background .3s;
+      border-left: 3px solid transparent;
+    }
+    .drive-row:last-child { border-bottom: none; }
+    .drive-row:hover { border-left-color: var(--teal); background: rgba(255,255,255,.02); }
+    .drive-letter {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.8rem; font-weight: 900; color: #2dd4bf; padding: 24px;
+      border-right: 1px solid rgba(255,255,255,.07);
+      background: rgba(255,255,255,.03);
+    }
+    .drive-content { padding: 24px 28px; }
+    .drive-phase-label { font-family: monospace; font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; color: #14B8A8; margin-bottom: 4px; }
+    .drive-phase-title { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 6px; }
+    .drive-phase-desc { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.65; }
+    .drive-timeline {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; margin-top: 20px;
+    }
+    .tl-item { padding: 20px 22px; background: rgba(255,255,255,.03); border-right: 1px solid rgba(255,255,255,.07); }
+    .tl-item:last-child { border-right: none; }
+    .tl-week { font-family: monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: #14B8A8; margin-bottom: 6px; }
+    .tl-title { font-size: .9rem; font-weight: 700; color: white; margin-bottom: 4px; }
+    .tl-desc { font-size: .78rem; color: rgba(255,255,255,.4); line-height: 1.5; }
+
+    /* ── SECTION PLATEFORME ── */
+    #plateforme { background: var(--warm-100); }
+    .pill-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+    .pillar-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 10px; border: 1.5px solid var(--border);
+      background: white; font-size: .82rem; font-weight: 600; color: var(--foreground);
+      transition: all .3s;
+    }
+    .pillar-pill:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 16px -4px rgba(30,42,74,.12); }
+    .pill-num {
+      font-family: monospace; font-size: .65rem; font-weight: 700; width: 18px; height: 18px;
+      border-radius: 5px; background: var(--primary); color: white;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .plat-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .plat-col h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; color: var(--foreground); line-height: 1.2; }
+    .plat-col p { font-size: .92rem; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .check-list li { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; color: var(--muted); line-height: 1.55; }
+    .check-list li::before { content: "✓"; color: var(--teal); font-weight: 800; flex-shrink: 0; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .tag { padding: 5px 12px; border-radius: 6px; background: rgba(30,42,74,.06); border: 1px solid var(--border); font-family: monospace; font-size: .7rem; font-weight: 600; color: var(--muted); }
+    .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 24px; }
+    .role-col { padding: 24px; border-right: 1px solid var(--border); }
+    .role-col:last-child { border-right: none; }
+    .role-col h4 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+    .role-col .role-sub { font-family: monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; }
+
+    /* ── USE CASES ── */
+    #usecases { background: var(--warm); }
+    .uc-grid { display: flex; flex-direction: column; gap: 14px; }
+    .uc-card {
+      background: white; border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 22px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px;
+      align-items: center; transition: transform .3s ease, box-shadow .3s;
+    }
+    .uc-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px -8px rgba(30,42,74,.08); }
+    .uc-type-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 8px; font-family: monospace;
+      font-size: .68rem; font-weight: 700; white-space: nowrap;
+    }
+    .uc-body h4 { font-size: .95rem; font-weight: 700; margin-bottom: 3px; }
+    .uc-body p { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+    .uc-gain { font-family: monospace; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+
+    /* ── SECURITE (dark) ── */
+    .s-secure { background: linear-gradient(180deg, #1E2A4A 0%, #141D35 100%); padding: 96px 0; }
+    .secure-grid { display: grid; grid-template-columns: repeat(2, 1fr) repeat(2, 1fr); gap: 16px; }
+    .secure-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 24px;
+      transition: transform .3s ease, background .3s;
+    }
+    .secure-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.08); }
+    .secure-icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .secure-card h4 { font-size: .9rem; font-weight: 700; color: white; margin-bottom: 6px; }
+    .secure-card p { font-size: .8rem; color: rgba(255,255,255,.35); line-height: 1.6; }
+    .vs-table { border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; margin-top: 40px; }
+    .vs-header { display: grid; grid-template-columns: 2fr 1fr 1fr; background: rgba(255,255,255,.06); padding: 12px 20px; }
+    .vs-header span { font-family: monospace; font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); }
+    .vs-header span:last-child { color: #14B8A8; }
+    .vs-row { display: grid; grid-template-columns: 2fr 1fr 1fr; padding: 12px 20px; border-top: 1px solid rgba(255,255,255,.07); font-size: .88rem; }
+    .vs-row:nth-child(odd) { background: rgba(255,255,255,.02); }
+    .vs-feat { color: rgba(255,255,255,.7); font-weight: 500; }
+    .vs-no { color: rgba(255,255,255,.25); font-size: .8rem; }
+    .vs-yes { font-family: monospace; font-size: .8rem; font-weight: 700; color: #14B8A8; }
+
+    /* ── TARIFS ── */
+    #tarifs { background: var(--warm-100); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
+    .price-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 32px; transition: transform .3s ease, box-shadow .3s; }
+    .price-card:hover { transform: translateY(-5px); box-shadow: 0 20px 60px -12px rgba(30,42,74,.10); }
+    .price-card.featured { background: linear-gradient(135deg, #1E2A4A 0%, #2B3D6E 100%); border: none; position: relative; overflow: hidden; }
+    .price-card.featured::before { content: ''; position: absolute; top: -40%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(13,148,136,.2) 0%, transparent 70%); border-radius: 50%; }
+    .featured-badge { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,.2); color: white; font-family: monospace; font-size: .65rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: .08em; }
+    .price-step { font-family: monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 16px; }
+    .price-card.featured .price-step { color: rgba(255,255,255,.45); }
+    .price-val { font-size: 2.8rem; font-weight: 900; letter-spacing: -.03em; color: var(--foreground); line-height: 1; margin-bottom: 4px; }
+    .price-card.featured .price-val { color: white; }
+    .price-period { font-size: .82rem; color: var(--muted); margin-bottom: 16px; }
+    .price-card.featured .price-period { color: rgba(255,255,255,.5); }
+    .price-name { font-size: 1rem; font-weight: 700; color: var(--foreground); margin-bottom: 8px; }
+    .price-card.featured .price-name { color: white; }
+    .price-desc { font-size: .82rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .price-card.featured .price-desc { color: rgba(255,255,255,.6); }
+    .price-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .price-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .82rem; color: var(--muted); line-height: 1.5; }
+    .price-list li::before { content: "✓"; font-weight: 800; flex-shrink: 0; color: var(--teal); }
+    .price-card.featured .price-list li { color: rgba(255,255,255,.7); }
+    .price-card.featured .price-list li::before { color: #2dd4bf; }
+    .price-note { background: rgba(255,255,255,.1); border-radius: 8px; padding: 12px 14px; font-size: .75rem; color: rgba(255,255,255,.5); margin-top: 16px; }
+    .budget-table { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .budget-header { display: flex; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+    .budget-header span:first-child { font-weight: 700; font-size: .95rem; }
+    .budget-header span:last-child { font-family: monospace; font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .budget-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-bottom: 1px solid var(--border); font-size: .9rem; }
+    .budget-row:last-of-type { border-bottom: none; }
+    .budget-row:nth-child(odd) { background: var(--warm); }
+    .budget-val { text-align: right; }
+    .budget-val strong { display: block; font-family: monospace; font-weight: 700; }
+    .budget-val small { font-size: .75rem; color: var(--muted); }
+    .budget-note { padding: 12px 24px; background: var(--warm-100); font-size: .78rem; font-style: italic; color: var(--muted); }
+
+    /* ── CTA ── */
+    .s-cta { padding: 96px 0; background: var(--teal); position: relative; overflow: hidden; }
+    .cta-orb { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: rgba(255,255,255,.08); filter: blur(60px); top: -20%; right: -10%; pointer-events: none; }
+    .cta-inner { text-align: center; position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+    .cta-inner h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: white; margin-bottom: 16px; letter-spacing: -.025em; line-height: 1.15; }
+    .cta-inner p { font-size: 1.05rem; color: rgba(255,255,255,.8); margin-bottom: 36px; line-height: 1.75; }
+    .cta-question {
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+      border-radius: 14px; padding: 22px 36px; margin-bottom: 36px;
+      font-size: 1.05rem; font-weight: 600; color: white; line-height: 1.55;
+    }
+    .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-white-solid {
+      background: white; color: var(--teal); padding: 14px 28px; border-radius: 10px;
+      font-size: .92rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;
+      transition: all .2s;
+    }
+    .btn-white-solid:hover { background: rgba(255,255,255,.95); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,255,255,.2); }
+    .btn-outline-white {
+      background: transparent; border: 2px solid rgba(255,255,255,.4); color: white;
+      padding: 14px 28px; border-radius: 10px; font-size: .92rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+    }
+    .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,.1); }
+    .cta-contact { margin-top: 28px; font-size: .88rem; color: rgba(255,255,255,.6); }
+    .cta-contact a { color: white; font-weight: 600; }
+    .cta-contact a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer { background: linear-gradient(180deg, #1E2A4A 0%, #141D35 100%); padding: 56px 0 28px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .footer-logo { height: 44px; margin-bottom: 14px; }
+    .footer-brand p { font-size: .8rem; color: rgba(255,255,255,.35); max-width: 280px; line-height: 1.65; }
+    .footer-links h5 { font-family: monospace; font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.45); margin-bottom: 14px; font-weight: 700; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-links li a { font-size: .82rem; color: rgba(255,255,255,.35); transition: color .15s; }
+    .footer-links li a:hover { color: white; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer-bottom span { font-size: .75rem; color: rgba(255,255,255,.2); font-family: monospace; }
+
+    /* ── SECTION HEADERS ── */
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-header h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 14px; }
+    .section-header p { font-size: 1rem; color: var(--muted); max-width: 620px; margin: 0 auto; line-height: 1.75; }
+    .text-teal { color: var(--teal); }
+    .text-muted { color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .constat-grid, .plat-grid2, .pricing-grid, .secure-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .drive-timeline { grid-template-columns: 1fr 1fr; }
+      .role-grid { grid-template-columns: 1fr; }
+      .uc-card { grid-template-columns: auto 1fr; }
+      .uc-gain { grid-column: 2; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      section { padding: 64px 0; }
+      .hero-body { padding: 60px 20px 48px; }
+      .drive-timeline { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <img src="https://gabioha.github.io/abra-offre/MekorAI%20Logo%20Beige.svg" alt="MekorAI" class="logo-light">
+      <img src="https://gabioha.github.io/abra-offre/MekorAI%20Logo%20BM.svg" alt="MekorAI" class="logo-dark">
+    </div>
+    <div class="nav-client"><img src="https://gabioha.github.io/abra-offre/Milexia%20LOGO.png" alt="Milexia"><span class="nav-client-text">×</span></div>
+    <div class="nav-links">
+      <a href="#constat">Constat</a>
+      <a href="#drive">Methode</a>
+      <a href="#plateforme">Plateforme</a>
+      <a href="#usecases">Cas d'usage</a>
+      <a href="#tarifs">Tarifs</a>
+    </div>
+    <a href="#cta" class="nav-cta">Demander un cadrage</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="orb" style="width:500px;height:500px;top:-10%;right:-10%;background:rgba(13,148,136,.10);animation:floatSlow 10s ease-in-out infinite;"></div>
+  <div class="orb" style="width:280px;height:280px;bottom:12%;left:-6%;background:rgba(14,165,233,.12);animation:floatA 7s ease-in-out infinite;"></div>
+  <style>
+    @keyframes floatSlow { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+    @keyframes floatA { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+    @keyframes fadeUp { from { opacity:0;transform:translateY(28px); } to { opacity:1;transform:none; } }
+    .fu1 { animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .1s both; }
+    .fu2 { animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .25s both; }
+    .fu3 { animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .4s both; }
+    .fu4 { animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .55s both; }
+    .fu5 { animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .7s both; }
+  </style>
+  <div class="hero-body">
+    <div class="hero-eyebrow fu1">
+      <div class="dot"></div>
+      <span>Proposition exclusive pour</span>
+      <strong>Milexia</strong>
+      <span>·</span>
+      <span>Distribution de composants électroniques & scientifiques</span>
+    </div>
+
+    <div class="hero-client-logo fu1"><img src="https://gabioha.github.io/abra-offre/Milexia%20LOGO.png" alt="Milexia" style="height:36px;max-width:200px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;"><span class="hero-x">×</span><img src="https://gabioha.github.io/abra-offre/MekorAI%20Logo%20Beige.svg" alt="MekorAI" style="height:32px;"></div>
+
+    <h1 class="hero-title fu2">
+      L'IA de vos equipes.<br>
+      <em>Sous votre controle.</em>
+    </h1>
+    <p class="hero-sub fu3">
+      Plateforme IA gouvernee, methode <strong>DRIVE</strong> et ROI mesure ·
+      du diagnostic terrain a la mise en production <strong>en six semaines.</strong>
+    </p>
+    <div class="hero-actions fu4">
+      <a href="#cta" class="btn-white">Demander un atelier de cadrage <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 7h8M7 3l4 4-4 4"/></svg></a>
+      <a href="#drive" class="btn-ghost">Decouvrir la methode</a>
+    </div>
+    <div class="hero-stats fu5">
+      <div class="hero-stat">
+        <div class="hero-stat-val">≈80%</div>
+        <div class="hero-stat-label">des projets IA n'atteignent jamais la production</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">6 sem.</div>
+        <div class="hero-stat-label">du diagnostic au ROI mesure en production</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">70%</div>
+        <div class="hero-stat-label">des cas d'usage disponibles en Marketplace</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind"><span>Scroll</span><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5l4 4 4-4"/></svg></div>
+</section>
+
+<!-- ── CONSTAT ── -->
+<section id="constat">
+  <div class="container">
+    <div class="constat-grid">
+      <div class="reveal-l">
+        <div class="kicker"><div class="kicker-dot"></div><div class="kicker-text">Le constat terrain</div></div>
+        <h2 style="font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:16px;">
+          L'IA tourne.<br><span class="text-muted" style="font-weight:600;">Rien n'est maitrise.</span>
+        </h2>
+        <p style="color:var(--muted);font-size:.95rem;line-height:1.75;margin-bottom:28px;max-width:380px;">
+          Des agents crees en silo. Des automations sans owner. Aucune visibilite groupe. Aucune preuve d'impact.
+          Ce n'est pas un probleme d'outils · <strong style="color:var(--foreground);">c'est un probleme de cadrage et d'exploitation.</strong>
+        </p>
+        <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:24px 28px;">
+          <div class="constat-big">≈80<span>%</span></div>
+          <p style="color:var(--muted);font-size:.85rem;line-height:1.65;max-width:240px;margin-top:8px;">
+            des projets IA n'atteignent jamais la production a l'echelle · par manque de cadre, pas de technologie.
+          </p>
+        </div>
+      </div>
+      <div class="constat-args">
+        
+        <div class="arg-card reveal d1">
+          <div class="arg-icon" style="background:rgba(229,57,53,.09);">⚡</div>
+          <div>
+            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:5px;">POCs sans lendemain</h3>
+            <p style="font-size:.82rem;color:var(--muted);line-height:1.6;">Initiatives isolees, sans cadre de passage en production. Rien ne scale. Le COMEX doute et coupe les budgets.</p>
+          </div>
+        </div>
+        <div class="arg-card reveal d2">
+          <div class="arg-icon" style="background:rgba(245,158,11,.09);">🔀</div>
+          <div>
+            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:5px;">Shadow AI et spaghetti automation</h3>
+            <p style="font-size:.82rem;color:var(--muted);line-height:1.6;">Chaque equipe fait ses propres outils. Fragiles, non documentes, impossibles a auditer. Le risque RGPD est reel.</p>
+          </div>
+        </div>
+        <div class="arg-card reveal d3">
+          <div class="arg-icon" style="background:rgba(99,102,241,.09);">🔍</div>
+          <div>
+            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:5px;">Proliferation sans gouvernance</h3>
+            <p style="font-size:.82rem;color:var(--muted);line-height:1.6;">Chaque BU choisit son LLM, son outil, son approche. Le groupe perd le controle sans s'en rendre compte.</p>
+          </div>
+        </div>
+        <div class="arg-card reveal d4">
+          <div class="arg-icon" style="background:rgba(30,42,74,.08);">📊</div>
+          <div>
+            <h3 style="font-size:.92rem;font-weight:700;margin-bottom:5px;">ROI invisible et budgets geles</h3>
+            <p style="font-size:.82rem;color:var(--muted);line-height:1.6;">Aucune tracabilite financiere. Impossible de comparer un projet A vs B. Le COMEX navigue a vue.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── DRIVE ── -->
+<section class="s-drive" id="drive">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="kicker light" style="justify-content:center;"><div class="kicker-dot" style="background:#2dd4bf;"></div><div class="kicker-text" style="color:rgba(255,255,255,.5);">La methode proprietaire</div></div>
+      <h2 style="color:white;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:800;letter-spacing:-.025em;margin-bottom:14px;">
+        DRIVE · du terrain au ROI mesure
+      </h2>
+      <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.75;max-width:600px;margin:0 auto;">
+        Cinq phases, six semaines sur un perimetre pilote. Un Go/No-Go entre chaque phase. Un livrable formel a chaque etape.
+      </p>
+    </div>
+    <div class="drive-phases reveal">
+        <div class="drive-row">
+          <div class="drive-letter">D</div>
+          <div class="drive-content">
+            <div class="drive-phase-label">Phase · Discover</div>
+            <div class="drive-phase-title">Audit terrain</div>
+            <p class="drive-phase-desc">Une demi-journée par interlocuteur clé. On écoute le réel : processus, irritants, volumétrie, contraintes réglementaires. On ne parle pas encore d'IA.</p>
+          </div>
+        </div>
+        <div class="drive-row">
+          <div class="drive-letter">R</div>
+          <div class="drive-content">
+            <div class="drive-phase-label">Phase · Rank</div>
+            <div class="drive-phase-title">Scoring & priorisation</div>
+            <p class="drive-phase-desc">Chaque cas candidat est noté sur trois axes pondérés (Impact × 3 + Faisabilité × 2 - Risque × 1) pour construire un portefeuille objectivement priorisé.</p>
+          </div>
+        </div>
+        <div class="drive-row">
+          <div class="drive-letter">I</div>
+          <div class="drive-content">
+            <div class="drive-phase-label">Phase · Identify</div>
+            <div class="drive-phase-title">Triage 3T™</div>
+            <p class="drive-phase-desc">Chaque cas est classé selon sa nature réelle · Agent IA, Automatisation ou Workflow · ce qui détermine délai, coût et mode de déploiement.</p>
+          </div>
+        </div>
+        <div class="drive-row">
+          <div class="drive-letter">V</div>
+          <div class="drive-content">
+            <div class="drive-phase-label">Phase · Validate</div>
+            <div class="drive-phase-title">Business case ex-ante</div>
+            <p class="drive-phase-desc">Hypothèse de gain quantifiée avant tout développement. Décision Go / No-Go documentée et partagée avec le sponsor.</p>
+          </div>
+        </div>
+        <div class="drive-row">
+          <div class="drive-letter">E</div>
+          <div class="drive-content">
+            <div class="drive-phase-label">Phase · Execute</div>
+            <div class="drive-phase-title">Déploiement & ROI ex-post</div>
+            <p class="drive-phase-desc">Pilotes construits en parallèle, mise en production, formation. ROI mesuré sur les premiers jours d'usage réel et comparé à l'ex-ante.</p>
+          </div>
+        </div></div>
+    <div class="drive-timeline reveal">
+      <div class="tl-item"><div class="tl-week">Semaine 1</div><div class="tl-title">Audit terrain</div><div class="tl-desc">8 demi-journees d'entretiens par fonction</div></div><div class="tl-item"><div class="tl-week">Semaine 2</div><div class="tl-title">Cadrage et scoring</div><div class="tl-desc">Catalogue priorise, business case ex-ante, Go/No-Go</div></div><div class="tl-item"><div class="tl-week">Sem. 3-5</div><div class="tl-title">Build et deploiement</div><div class="tl-desc">3 cas d'usage en parallele, formation, mise en prod</div></div><div class="tl-item"><div class="tl-week">Semaine 6</div><div class="tl-title">Mesure et roadmap</div><div class="tl-desc">ROI ex-post, gouvernance, roadmap 12-18 mois</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PLATEFORME ── -->
+<section id="plateforme">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="kicker" style="justify-content:center;"><div class="kicker-dot"></div><div class="kicker-text">La plateforme</div></div>
+      <h2>MekorAI, le socle IA<br>de votre organisation.</h2>
+      <p>Une plateforme d'exploitation complete · du besoin au ROI mesure · qui se connecte a votre SI, orchestre vos agents et applique une gouvernance stricte de bout en bout.</p>
+    </div>
+    <div class="pill-grid reveal">
+      <div class="pillar-pill"><div class="pill-num">1</div>Gouvernance</div><div class="pillar-pill"><div class="pill-num">2</div>Deploiement</div><div class="pillar-pill"><div class="pill-num">3</div>Marketplace</div><div class="pillar-pill"><div class="pill-num">4</div>Observabilite</div><div class="pillar-pill"><div class="pill-num">5</div>ROI Tracking</div>
+    </div>
+    <div class="plat-grid2 reveal">
+      <div class="plat-col">
+        <div style="font-family:monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;"><div class="pill-num">1</div> Gouvernance</div>
+        <h3>Zero shadow automation.<br><span class="text-muted" style="font-weight:600;">Controle total.</span></h3>
+        <p>RBAC, environnements isoles, workflows d'approbation, audit logs complets. Chaque action est tracable, chaque deploiement est valide.</p>
+        <ul class="check-list">
+          <li>Droits granulaires par role, environnement et entite</li>
+          <li>Workflow de validation IT / securite / owner metier</li>
+          <li>Historique complet · tout est auditable a tout moment</li>
+          <li>Conformite AI Act native · registre, Annexe IV, FRIA</li>
+        </ul>
+      </div>
+      <div class="plat-col">
+        <div style="font-family:monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px;"><div class="pill-num">2</div> Deploiement</div>
+        <h3>Sur votre infrastructure.<br><span class="text-muted" style="font-weight:600;">Selon vos regles.</span></h3>
+        <p>Self-hosted, on-prem ou VPC. Multi-equipes, multi-filiales, multi-tenants. Reversibilite garantie. Vos donnees ne quittent jamais votre perimetre.</p>
+        <ul class="check-list">
+          <li>On-premise / VPC / cloud prive · souverainete totale</li>
+          <li>Architecture scalable · du workspace au groupe</li>
+          <li>Portabilite complete · migration et export garantis</li>
+          <li>Marque blanche · votre logo, vos couleurs, votre domaine</li>
+        </ul>
+        <div class="tag-list">
+          <span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">LLM Agnostic</span><span class="tag">REST APIs</span><span class="tag">MCP Protocol</span>
+        </div>
+      </div>
+    </div>
+    <div class="role-grid reveal">
+      <div class="role-col"><div style="width:38px;height:38px;border-radius:9px;background:#1E2A4A;color:white;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">A</div><h4>Admin IT</h4><div class="role-sub">Gouvernance Technique & Securite</div><ul class="check-list" style="gap:7px;"><li>Gestion Tenants / filiales</li><li>SSO et cles API</li><li>Audit logs et monitoring</li><li>Builder technique</li></ul></div><div class="role-col"><div style="width:38px;height:38px;border-radius:9px;background:#0D9488;color:white;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">M</div><h4>Manager Metier</h4><div class="role-sub">Pilotage Metier & ROI</div><ul class="check-list" style="gap:7px;"><li>Pilotage ROI ex-ante / ex-post</li><li>Gestion equipes et acces</li><li>Catalogue et activation UC</li><li>Reporting performance</li></ul></div><div class="role-col"><div style="width:38px;height:38px;border-radius:9px;background:#6366F1;color:white;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">U</div><h4>Utilisateur</h4><div class="role-sub">Productivite & Execution</div><ul class="check-list" style="gap:7px;"><li>Portail productivite</li><li>Workflows et automatisations</li><li>Chat agents IA securise</li><li>Feedback et idees</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── CAS D'USAGE ── -->
+<section id="usecases">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="kicker" style="justify-content:center;"><div class="kicker-dot"></div><div class="kicker-text">Cas d'usage pour Milexia</div></div>
+      <h2>Des gains mesures<br>dans vos equipes.</h2>
+      <p>Six cas d'usage identifies pour <strong>Milexia</strong>, issus de notre reference de 72 points de douleur qualifies. Vos priorites sont confirmees pendant l'atelier de cadrage.</p>
+    </div>
+    <div class="uc-grid reveal">
+        <div class="uc-card">
+          <div class="uc-type-badge" style="background:rgba(234,179,8,0.1);color:#B45309;">🔗 Workflow</div>
+          <div class="uc-body">
+            <h4>Génération de devis technique</h4>
+            <p>À partir du cahier des charges client, génère un devis complet avec références produits et délais.</p>
+          </div>
+          <div class="uc-gain" style="color:#B45309;">−70% temps</div>
+        </div>
+        <div class="uc-card">
+          <div class="uc-type-badge" style="background:rgba(13,148,136,0.1);color:#0D9488;">⚙️ Automatisation</div>
+          <div class="uc-body">
+            <h4>Qualification des demandes entrantes</h4>
+            <p>Classe et route automatiquement les RFQ entrants selon la gamme, le niveau et l'urgence.</p>
+          </div>
+          <div class="uc-gain" style="color:#0D9488;">Temps réel</div>
+        </div>
+        <div class="uc-card">
+          <div class="uc-type-badge" style="background:rgba(99,102,241,0.1);color:#4F46E5;">🤖 Agent IA</div>
+          <div class="uc-body">
+            <h4>Assistant produit & datasheet</h4>
+            <p>Répond aux questions techniques sur les composants en s'appuyant sur les datasheets constructeurs.</p>
+          </div>
+          <div class="uc-gain" style="color:#4F46E5;">−40% sollicitations</div>
+        </div>
+        <div class="uc-card">
+          <div class="uc-type-badge" style="background:rgba(13,148,136,0.1);color:#0D9488;">⚙️ Automatisation</div>
+          <div class="uc-body">
+            <h4>Suivi commandes & alertes stock</h4>
+            <p>Monitore les délais fournisseurs, détecte les ruptures et alerte les commerciaux proactivement.</p>
+          </div>
+          <div class="uc-gain" style="color:#0D9488;">0 surprise</div>
+        </div>
+        <div class="uc-card">
+          <div class="uc-type-badge" style="background:rgba(234,179,8,0.1);color:#B45309;">🔗 Workflow</div>
+          <div class="uc-body">
+            <h4>Reporting commercial hebdomadaire</h4>
+            <p>Consolide les KPI de chaque commercial, pipeline et forecasts chaque lundi.</p>
+          </div>
+          <div class="uc-gain" style="color:#B45309;">−3h/sem</div>
+        </div>
+        <div class="uc-card">
+          <div class="uc-type-badge" style="background:rgba(99,102,241,0.1);color:#4F46E5;">🤖 Agent IA</div>
+          <div class="uc-body">
+            <h4>Support clients N1 technique</h4>
+            <p>Traite les demandes de 1er niveau (statut commande, disponibilité, docs) sans intervention humaine.</p>
+          </div>
+          <div class="uc-gain" style="color:#4F46E5;">−55% tickets</div>
+        </div></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── SECURITE ── -->
+<section class="s-secure">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="kicker light" style="justify-content:center;"><div class="kicker-dot" style="background:#2dd4bf;"></div><div class="kicker-text" style="color:rgba(255,255,255,.5);">Securite et conformite</div></div>
+      <h2 style="color:white;">Securise par design.<br><span style="color:#2dd4bf;">Auditable par nature.</span></h2>
+      <p style="color:rgba(255,255,255,.5);">Controle des acces, journal d'audit complet, conformite AI Act et RGPD. La DSI valide une fois, pour tout le groupe.</p>
+    </div>
+    <div class="secure-grid reveal">
+      <div class="secure-card d1"><div class="secure-icon">🔒</div><h4>RBAC et SSO</h4><p>Controle d'acces granulaire, integration annuaire d'entreprise (Azure AD, Okta).</p></div><div class="secure-card d2"><div class="secure-icon">📋</div><h4>Audit Logs</h4><p>Journalisation complete de bout en bout. Qui a fait quoi, quand, avec quel prompt.</p></div><div class="secure-card d3"><div class="secure-icon">🛡</div><h4>Privacy by Design</h4><p>RGPD, donnees maitrisees, souverainete garantie. Vos donnees ne quittent jamais votre SI.</p></div><div class="secure-card d4"><div class="secure-icon">↩</div><h4>Versioning et rollback</h4><p>Approbations, retour arriere en un clic, release management integre.</p></div>
+    </div>
+    <div class="vs-table reveal">
+      <div class="vs-header"><span>Critere</span><span>Concurrents</span><span>MekorAI</span></div>
+      <div class="vs-row"><span class="vs-feat">Deploiement on-premise reel</span><span class="vs-no">Partiel ou absent</span><span class="vs-yes">Complet</span></div><div class="vs-row"><span class="vs-feat">Conformite AI Act integree</span><span class="vs-no">Add-on ou manuel</span><span class="vs-yes">Natif</span></div><div class="vs-row"><span class="vs-feat">ROI ex-ante et ex-post natif</span><span class="vs-no">Absent</span><span class="vs-yes">Integre</span></div><div class="vs-row"><span class="vs-feat">Methode d'audit incluse</span><span class="vs-no">Non</span><span class="vs-yes">DRIVE</span></div><div class="vs-row"><span class="vs-feat">Tokens inclus dans la licence</span><span class="vs-no">Souvent en sus</span><span class="vs-yes">Inclus</span></div><div class="vs-row"><span class="vs-feat">Standards ouverts</span><span class="vs-no">Souvent proprietaire</span><span class="vs-yes">Open standards</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TARIFS ── -->
+<section id="tarifs">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="kicker" style="justify-content:center;"><div class="kicker-dot"></div><div class="kicker-text">Les tarifs</div></div>
+      <h2>Une offre simple<br>et transparente.</h2>
+      <p>Trois elements lisibles. Pas de surprise de consommation, pas de couts caches. Tous les montants sont hors taxes.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal d1">
+        <div class="price-step">Etape 01</div>
+        <div class="price-val">8 000 €</div>
+        <div class="price-period">HT · Forfait unique · Non remboursable</div>
+        <div class="price-name">Plan IA de demarrage</div>
+        <p class="price-desc">Audit DRIVE terrain, atelier de cadrage, identification et priorisation des cas d'usage, business case ex-ante, feuille de route chiffree.</p>
+        <ul class="price-list">
+          <li>Audit DRIVE complet (8 entretiens)</li>
+          <li>Atelier de cadrage strategique</li>
+          <li>Catalogue priorise de cas d'usage</li>
+          <li>Business case ex-ante avec ROI</li>
+          <li>Feuille de route 12-18 mois</li>
+        </ul>
+      </div>
+      <div class="price-card featured reveal d2">
+        <div class="featured-badge">Recommande</div>
+        <div class="price-step">Etape 02</div>
+        <div class="price-val" style="color:white;">39 €</div>
+        <div class="price-period">HT / utilisateur / mois · Tokens inclus</div>
+        <div class="price-name">Licence MekorAI</div>
+        <p class="price-desc">Acces complet a la plateforme (Pilotage, Industrialisation, Valeur), gouvernance RBAC/SSO, marketplace, ROI tracking. Facturation annuelle.</p>
+        <ul class="price-list">
+          <li>Tokens IA inclus · zero surprise</li>
+          <li>Gouvernance RBAC et SSO</li>
+          <li>Marketplace et catalogue</li>
+          <li>ROI Tracking ex-ante / ex-post</li>
+          <li>Support editeur N3 MekorAI</li>
+        </ul>
+        <div class="price-note">Option BYOK (votre cle API) disponible a 29 € HT / utilisateur / mois</div>
+      </div>
+      <div class="price-card reveal d3">
+        <div class="price-step">Etape 03</div>
+        <div class="price-val">Sur devis</div>
+        <div class="price-period">Apres atelier de cadrage · Jours-homme</div>
+        <div class="price-name">Mise en oeuvre pilote</div>
+        <p class="price-desc">Deploiement des 2-3 cas d'usage prioritaires sur la plateforme, connectes a vos outils metiers, avec mesure des resultats.</p>
+        <ul class="price-list">
+          <li>2 a 3 cas d'usage en production</li>
+          <li>Formation des equipes incluse</li>
+          <li>Mesure ROI ex-post</li>
+          <li>Gouvernance et documentation</li>
+        </ul>
+        <div style="background:var(--warm-100);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:.78rem;color:var(--muted);margin-top:16px;">
+          Option <strong style="color:var(--foreground);">IA au resultat</strong> · part indexee sur la performance des cas livres.
+        </div>
+      </div>
+    </div>
+    <div class="budget-table reveal">
+      <div class="budget-header"><span>Exemple de budget · Milexia (estimation)</span><span>Indicatif HT</span></div>
+      <div class="budget-row"><span>Plan IA de demarrage (audit DRIVE)</span><div class="budget-val"><strong>8 000 €</strong><small>Une fois</small></div></div>
+      <div class="budget-row"><span>Mise en oeuvre pilote (2-3 cas d'usage)</span><div class="budget-val"><strong>Sur devis</strong><small>Apres cadrage</small></div></div>
+      <div class="budget-row"><span>Licence · 50 utilisateurs · 12 mois</span><div class="budget-val"><strong>23 400 €/an</strong><small>Tokens inclus</small></div></div>
+      <div class="budget-note">Le cout complet, jetons d'IA compris, tient en une seule ligne lisible. Pas de surprise de consommation, pas de couts caches.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="s-cta" id="cta">
+  <div class="cta-orb"></div>
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div style="font-family:monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.55);margin-bottom:16px;">La prochaine etape</div>
+      <h2>Un atelier de cadrage d'une heure pour commencer.</h2>
+      <p>La meilleure facon de mesurer ce que MekorAI peut apporter a vos equipes, c'est de cadrer ensemble vos premiers cas d'usage.</p>
+      <div class="cta-question">
+        Preferez-vous organiser cet echange en <strong>visio</strong> ou en <strong>presentiel</strong> dans vos locaux&nbsp;?
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:gabriel@mekorai.com?subject=Demande%20atelier%20de%20cadrage%20MekorAI%20%E2%80%94%20Milexia&body=Bonjour%20Gabriel%2C%0A%0AJe%20souhaite%20organiser%20un%20atelier%20de%20cadrage.%0APref%C3%A9rence%20%3A%20[Visio%20%2F%20Pr%C3%A9sentiel]%0ACr%C3%A9neaux%20%3A%20[...]" class="btn-white-solid">
+          Reserver un creneau <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 7h8M7 3l4 4-4 4"/></svg>
+        </a>
+        <a href="tel:+33782531100" class="btn-outline-white">07 82 53 11 00</a>
+      </div>
+      <div class="cta-contact">
+        <strong>Gabriel Ohana</strong>, CEO, MekorAI ·
+        <a href="mailto:gabriel@mekorai.com">gabriel@mekorai.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="https://gabioha.github.io/abra-offre/MekorAI%20Logo%20Beige.svg" alt="MekorAI" class="footer-logo">
+        <p>MekorAI · La plateforme IA gouvernee pour les ETIs et grands groupes. Self-hosted, conforme AI Act, ROI mesure.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Proposition</h5>
+        <ul>
+          <li><a href="#constat">Constat</a></li>
+          <li><a href="#drive">Methode DRIVE</a></li>
+          <li><a href="#plateforme">Plateforme</a></li>
+          <li><a href="#usecases">Cas d'usage</a></li>
+          <li><a href="#tarifs">Tarifs</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>MekorAI</h5>
+        <ul>
+          <li><a href="https://mekorai.com">mekorai.com</a></li>
+          <li><a href="https://platform.mekorai.com">platform.mekorai.com</a></li>
+          <li><a href="mailto:gabriel@mekorai.com">gabriel@mekorai.com</a></li>
+          <li><a href="https://www.linkedin.com/company/mekorai/">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 MekorAI SAS · SIREN 939 056 826 · Paris · Methode DRIVE marque deposee</span>
+      <span>Document confidentiel · Proposition commerciale pour Milexia</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.07, rootMargin: '0px 0px -50px 0px' }
+  );
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => obs.observe(el));
+
+  // Nav scroll state
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 64);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+</script>
+</body>
+</html>
